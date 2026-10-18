@@ -6,15 +6,17 @@ import PackageDescription
 let package = Package(
     name: "IosAwnFcmCore",
     platforms: [
-        // Firebase 12 raised its minimum deployment target to iOS 15.
+        // Firebase 12+ raised its minimum deployment target to iOS 15.
         .iOS(.v15)
     ],
     products: [
         .library(name: "IosAwnFcmCore", targets: ["IosAwnFcmCore"])
     ],
     dependencies: [
-        .package(url: "https://github.com/rafaelsetragni/IosAwnCore.git", from: "0.12.0"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.0.0"),
+        .package(url: "https://github.com/rafaelsetragni/IosAwnCore.git", from: "0.12.1"),
+        // Allow Firebase iOS SDK 12.x (firebase_core 4 / CocoaPods) and 13.x
+        // (firebase_core 5 / SwiftPM). `from: "12.0.0"` is 12.0.0..<13.0.0 only.
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", "12.0.0"..<"14.0.0"),
     ],
     targets: [
         .target(
